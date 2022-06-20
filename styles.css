@@ -10,7 +10,7 @@ body{
    #container-texto{
     background-color:#F8E7D8;
      display:grid;
-      gap: 16px;
+      gap: 4px;
      grid-template-columns:repeat {
        auto-fit,
        minmax{
@@ -30,7 +30,7 @@ body{
    #DatosTexto{
      border:solid;
      background-color:#FF9C44;
-    margin: 5px 5px;
+    margin: 50px 50px;
    }
    
    .ClassTexto{

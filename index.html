@@ -1,11 +1,145 @@
-<html>
-  <head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Document</title>
+</head>
+<body>
     <script src="script.js"></script>
-    <!-- <link rel="stylesheet" type="text/css" href="styles.css"> -->
-  </head>
-  <body>
-    <h1>Hello there!</h1>
-    <a href="/me.html">My other page</a>
-  </body>
-</html>
+    <body>
+     
+      <h1>Simulador de hipoteca</h1>
+
+      <div id="DatosTexto">
+      <h3>Datos a tener en cuenta:</h3>
+ 
+        <div id="container-texto">
+      <div id="texto-importe" class="ClassTexto">
+        <div id="texto-vivienda" class="titulos">
+             <h4>Importe a financiar:</h4></div>
+      <p> Hace muchos años que el banco ya no te financia el 100 % del valor de la vivienda, tendrás que aportar el 20% del valor de la vivienda y el 100% de los gastos derivados de la compraventa. Estos gastos son:
+          <ul>
+              <li>Notaria</li>
+              <li>Gestoria</li>
+              <li>Registro</li>
+              <li>Impuestos(ITP) [depende de cada CCAA (entre un 4%-10%)] </li>
+          </ul>
+        Esto <b>supondrá entre un 10%-15% del valor de la vivienda</b>. Asi que si le añadimos el 20% que no te financia el banco, nos dará que <b>necesitarás de ahorro entre un 30%-35% del valor de la vivienda.</b></p>  
+      <div>
+      <label for="Vivienda">
+        <h4> Valor de la vivienda:
+      <input type="number"  id="Vivienda"/></h4></label>
+      </div>
+      <div>  
+        <h4> Total ahorro que necesitaré: <span class="span"id="ahorro"></span></h4> 
+       </div>
+    <div>
+   <h4>Total que voy a finanaciar: <span class="span" id="totalresta"></h4></div>
+         <button type="submit" id="CalcularAhorro" onclick="calcularahorro()" >Calcular ahorro</button> </div>
+       
+        
+  <div id="TenerAños" class="ClassTexto">   
+    <div id="texto-años" class="titulos">
+      <h4>Años a financiar:</h4></div>
+  <p>Como norma general el banco te financia hasta los 70 años, muy excepcional hasta los 75. Para esta simulación cojeremos los 70 años.
+    </p>
+    <div>
+    <label for="edad">
+      <h4> Introduce tu edad: <input type="number" id="edad"/></h4></label>
+    </div>
+    <div>
+      <h4> Años que podré financiar: <span id="añosfinancia" class="span"></span></h4>
+      </div>
+    <div>
+      <h4> Total en meses: <span id="meses" class="span"></h4>
+        </div>
+  <div><button type="submit" onclick="calcularedad()">Calcular años y meses</button>
+    </div>
+    </div>
+    
+    <div id="Endeudamiento" class="ClassTexto">
+      <h4>Ratio de endeudamiento:</h4>
+      <p> Los bancos te dejarán endeudarte hasta un 40% del total de los ingresos y otros bancos que solo te dejan hasta un 30%. En este simulador calcularemos sobre un 35%.Ten en cuenta que si tienes un deuda con otro banco (otra hipoteca, un credito personal,etc) ese porcentaje se vera merado considerablemente(siempre y cuando tu deuda sea superior a 3 000€ sino no se tendra en cuenta)</p>
+    <p> Si tu ratio de endeudamiento en menor que la cuota, muy dificilmente, por no decir imposible, el banco te otorgará una hipoteca.</p>
+    <b>OJO!!! El pago de alquiler, comida y gastos del dia a dia no contaran como deudas </b>
+      <label for="sueldo1"><div>
+      Introduzca ingreso Persona 1: <input type="number" id="sueldo1"/> </label>
+      <label for="sueldo2"></div><div>
+        Introduzca ingreso Persona 2: <input type="number" id="sueldo2" value="0" /> </label></div>
+      <div>
+      <label for="deudas">
+      Deudas al mes: <input type="number" id="deudas" value="0"/></label></div>
+      <div>
+      Mi cuota maxima de endeudamiento es:
+      <span id="cuotaMax"></span></div>
+      <button type="submit" id="BottonCuotaMax"onclick="CalcularEndeudamiento()">Calcular cuota maxima </button>
+    </div>
+      
+      
+      <div id="Interes" class="ClassTexto">
+        <h4> Interes:</h4>
+        <p>El tipo de intere varia muchisimo según varios factores, algunos de estos son: 
+        <ul><li>Estabilidad laboral(Tener minimo 2 años trabajando en la misma empresa)</li>
+          <li>Aporte inicial</li>
+          <li>Plazo a pagar la hipoteca</li>
+          <li>Personas que entran en la operacion</li>
+          <li>Adquirir productos que te bonican el interes (seguro de hogar, seguro de vida, domiciliar nominas, etc). </li>   
+        </ul>
+        A dia de hoy (Junio de 2022) los intereses a cuota fija a 30 años y bonificada ronda entre un 1,5 %  y un 2,10%. El interes sin bonificar entre un 2% y casi un 3%.
+        <b></b>En este simulador utilizaremos un 2%</b> que creo que es lo que mas se podria similar a una media.</p>
+      <label for="interes"> Introduza aqui el interes:<input type="number" value="2" id="interes"/></label>
+    </div>
+   </div>
+     
+   </div>
+          <div id="Simulador">
+       <div id="containerSimulador">
+      <div id="simuladorEdad"class="ClassSimulador">
+      <h4>Tu cuota con tu edad<h4>
+      <h5> Total a Financiar:</h5> <span id="Financiar"></span>
+        <h5>Años: </h5><span id="añosTotal"></span>
+      <h5> Meses: </h5> <span id="MesesTotal"></span>
+       <div class="CuotayTotal">
+          <h4>Cuota:</h4> <span class=“SpanResultado“ id="cuotaEdad"></span> 
+          <h4>Total a pagar: </h4><span class=“SpanResultado“ id="totalpagarEdad"></span>
+        </div></div>
+        
+      <div id="simulador20" class="ClassSimulador">
+        <h4>Tu cuota a 20 años</h4>
+        <h5> Total a Financiar:</h5> <span id="Financiar20"></span>
+        <h5>Años:</h5> <span id="Años20"></span>
+        <h5> Meses: </h5> <span id="Meses20"></span>
+        <div class="CuotayTotal">
+          <h4>Cuota:</h4> <span class=“SpanResultado“ id="cuota20"></span> 
+            <h4>Total a pagar: </h4><span class=“SpanResultado“ id="totalpagar20"></span>
+          </div>
+        </div>
+        
+      <div id="simulador30" class="ClassSimulador" >
+          <h4>Tu cuota a 30 años</h4>
+          <h5> Total a Financiar:</h5> <span id="Financiar30"></span>
+        <h5>Años:</h5><span id="Años30"></span>
+          <h5> Meses: </h5> <span id="Meses30"></span>
+        <div class="CuotayTotal">
+                   <h4>Cuota:</h4> <span class=“SpanResultado“ id="cuota30"></span> 
+          <h4>Total a pagar: </h5><span class=“SpanResultado“ id="totalpagar30"></span>
+        </div></div>
+         
+          <div id="simulador40"class="ClassSimulador">
+            <h4>Tu cuota a 40 años</h4>
+            <h5> Total a Financiar:</h5> <span id="Financiar40"></span>
+            <h5>Años:</h5><span id="Años40"></span>
+            <h5> Meses: </h5> <span id="Meses40"></span>
+            <div class="CuotayTotal">
+            <h4>Cuota:</h4> <Span class=“SpanResultado“ id="cuota40"></Span> 
+            <h4>Total a pagar: </h4><span class=“SpanResultado“ id="totalpagar40"></span>
+            </div></div>
+         </div>
+          <div id="bottonFinal"><button onclick="calcularhipoteca()">Calcular Cuota</button> </div>
+          </div>
+    <footer><h4+>Creado por Adrián Canosa</h4></footer>
+</body>
+</html>  
